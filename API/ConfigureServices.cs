@@ -36,17 +36,14 @@ public static class ConfigureServices
             });
         });
 
-        var mapperConfig = new MapperConfiguration(mc =>
+        services.AddSingleton(new MapperConfiguration(mc =>
         {
             mc.AddProfile(new MappingProfile());
-        });
-        IMapper mapper = mapperConfig.CreateMapper();
-        services.AddSingleton(mapper);
+        }).CreateMapper());
     }
 
     public static void Database(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.AddDbContextPool<ApplicationDBContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("cs"));
