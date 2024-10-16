@@ -29,4 +29,11 @@ public class DeveloperController(DeveloperServices _service) : ControllerBase
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Post(Guid id) =>
        Ok(await _service.DeleteAsync(id).ToResponseAsync(message: Messages.RECORD_DELETED));
+
+
+    [HttpGet("/callback")]
+    public IActionResult Callback()
+    {
+        return Ok();
+    }
 }

@@ -5,6 +5,9 @@ using BL.Skills;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel.Commons;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using BL.Developer.Validators;
 
 namespace API;
 
@@ -15,6 +18,8 @@ public static class ConfigureServices
         services.Services(configuration);
         services.Database(configuration);
         services.Misc(configuration);
+        services.Misc(configuration);
+        services.Validator();
     }
 
     public static void Services(this IServiceCollection services, IConfiguration configuration)
@@ -48,5 +53,18 @@ public static class ConfigureServices
         {
             options.UseSqlServer(configuration.GetConnectionString("cs"));
         });
+    }
+    
+    public static void Validator(this IServiceCollection services)
+    {
+        //Skills
+        services.AddValidatorsFromAssemblyContaining<AddSkillValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateSkillValidator>();
+
+        //Developer
+        services.AddValidatorsFromAssemblyContaining<AddDeveloperValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateDeveloperValidator>();
+
+        services.AddFluentValidationAutoValidation();
     }
 }
