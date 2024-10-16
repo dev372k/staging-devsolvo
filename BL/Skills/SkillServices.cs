@@ -48,7 +48,7 @@ public class SkillServices(ApplicationDBContext _context, IMapper _mapper)
 
         var developerSkill = await _context.Set<DeveloperSkill>().FirstOrDefaultAsync(_ => _.SkillId == skill.Id);
         if (developerSkill != null)
-                    throw new CustomException(HttpStatusCode.NotFound, ExceptionMessage.CANNOT_DELETE);
+            throw new CustomException(HttpStatusCode.NotFound, ExceptionMessage.CANNOT_DELETE);
 
         _context.Set<Skill>().Remove(skill);
         await _context.SaveChangesAsync();
@@ -62,7 +62,7 @@ public class SkillServices(ApplicationDBContext _context, IMapper _mapper)
             throw new CustomException(HttpStatusCode.NotFound, ExceptionMessage.RECORD_DOESNOT_EXIST);
         return _mapper.Map<GetSkillDto>(skill);
     }
-    
+
     public async Task<GetSkillDto> GetbyDeveloperAsync(Guid developerId)
     {
         var developerSkill = await _context.Set<DeveloperSkill>().FirstOrDefaultAsync(_ => _.DeveloperId == developerId);
