@@ -79,20 +79,16 @@ public class SkillServices(ApplicationDBContext _context, IMapper _mapper)
                     throw new CustomException(HttpStatusCode.NotFound, ExceptionMessage.RECORD_DOESNOT_EXIST);
 
         var developerSkill = await _context.Set<DeveloperSkill>().FirstOrDefaultAsync(_ => _.SkillId == skill.Id && _.DeveloperId == developerId);
-        if (developerSkill != null)
-            _context.Set<DeveloperSkill>().Update(new DeveloperSkill
-            {
-                SkillId = skill.Id,
-                DeveloperId = developerId,
-            });
-        else
+        if (developerSkill == null)
+        {
             _context.Set<DeveloperSkill>().Add(new DeveloperSkill
             {
                 SkillId = skill.Id,
                 DeveloperId = developerId,
             });
 
-        await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+        }
 
         return new GetSkillDto(skill.Id, skill.Name);
     }
