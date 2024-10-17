@@ -44,7 +44,7 @@ namespace API.Middlewares
                 {
                     Status = false,
                     StatusCode = context.Response.StatusCode,
-                    Message = "Internal Server error."
+                    Message = "Internal server error."
                 });
             }
         }
