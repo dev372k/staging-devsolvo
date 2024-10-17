@@ -26,7 +26,7 @@ namespace API.Middlewares
             catch (CustomException ex)
             {
                 context.Response.StatusCode = (int)ex.StatusCode;
-                _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
+                _logger.LogError($"Error Message: {ex.Message}\nError Detail: {ex}");
 
                 await context.Response.WriteAsJsonAsync(new ResponseModel
                 {
@@ -38,7 +38,7 @@ namespace API.Middlewares
             catch (Exception ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError; ;
-                _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
+                _logger.LogError($"Error Message: {ex.Message}\nError Detail: {ex}");
 
                 await context.Response.WriteAsJsonAsync(new ResponseModel
                 {
