@@ -13,15 +13,12 @@ public class SkillConfiguration : IEntityTypeConfiguration<Skill>
 {
     public void Configure(EntityTypeBuilder<Skill> builder)
     {
-        // Primary Key
         builder.HasKey(s => s.Id);
 
-        // Property Configuration
         builder.Property(s => s.Name)
             .IsRequired()
             .HasMaxLength(100);
 
-        // Relationship with DeveloperSkill
         builder.HasMany(s => s.DeveloperSkills)
                .WithOne(ds => ds.Skill)
                .HasForeignKey(ds => ds.SkillId);

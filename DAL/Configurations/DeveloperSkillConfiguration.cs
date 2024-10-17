@@ -13,10 +13,8 @@ public class DeveloperSkillConfiguration : IEntityTypeConfiguration<DeveloperSki
 {
     public void Configure(EntityTypeBuilder<DeveloperSkill> builder)
     {
-        // Primary Key
         builder.HasKey(ds => ds.Id);
 
-        // Foreign Keys
         builder.HasOne(ds => ds.Developer)
                .WithMany(d => d.DeveloperSkills)
                .HasForeignKey(ds => ds.DeveloperId);
