@@ -1,10 +1,5 @@
 ﻿using BL.Developer.DTOs.Request;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Developer.Validators;
 

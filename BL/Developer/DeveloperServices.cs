@@ -7,10 +7,11 @@ using BL.Developer.DTOs.Request;
 using BL.Developer.DTOs.Response;
 using AutoMapper;
 using DAL.Entities;
+using BL.Developer.Abstrations;
 
 namespace BL.Developer;
 
-public class DeveloperServices(ApplicationDBContext _context, IMapper _mapper)
+public class DeveloperServices(ApplicationDBContext _context, IMapper _mapper) : IDeveloperServices
 {
     public async Task<GetDeveloperDto> AddAsync(AddDeveloperDto dto)
     {

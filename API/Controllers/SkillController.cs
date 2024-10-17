@@ -1,4 +1,4 @@
-using BL.Skills;
+using BL.Skills.Abstrations;
 using BL.Skills.DTOs.Request;
 using Microsoft.AspNetCore.Mvc;
 using SharedKernel.Commons;
@@ -8,7 +8,7 @@ namespace API.Controllers;
 
 [Route(DevContants.BASE_ENDPOINT)]
 [ApiController]
-public class SkillController(SkillServices _service) : ControllerBase
+public class SkillController(ISkillServices _service) : ControllerBase
 {
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>

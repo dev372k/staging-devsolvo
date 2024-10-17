@@ -8,6 +8,8 @@ using SharedKernel.Commons;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using BL.Developer.Validators;
+using BL.Skills.Abstrations;
+using BL.Developer.Abstrations;
 
 namespace API;
 
@@ -24,8 +26,8 @@ public static class ConfigureServices
 
     public static void Services(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<SkillServices>();
-        services.AddScoped<DeveloperServices>();
+        services.AddScoped<ISkillServices, SkillServices>();
+        services.AddScoped<IDeveloperServices, DeveloperServices>();
     }
 
     public static void Misc(this IServiceCollection services, IConfiguration configuration)

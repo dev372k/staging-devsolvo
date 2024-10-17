@@ -3,12 +3,13 @@ using BL.Developer;
 using BL.Developer.DTOs.Request;
 using SharedKernel.Commons;
 using SharedKernel.Extensions;
+using BL.Developer.Abstrations;
 
 namespace API.Controllers;
 
 [Route(DevContants.BASE_ENDPOINT)]
 [ApiController]
-public class DeveloperController(DeveloperServices _service) : ControllerBase
+public class DeveloperController(IDeveloperServices _service) : ControllerBase
 {
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>

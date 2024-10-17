@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.Skills.Abstrations;
 using BL.Skills.DTOs.Request;
 using BL.Skills.DTOs.Response;
 using DAL;
@@ -10,7 +11,7 @@ using System.Net;
 
 namespace BL.Skills;
 
-public class SkillServices(ApplicationDBContext _context, IMapper _mapper)
+public class SkillServices(ApplicationDBContext _context, IMapper _mapper) : ISkillServices
 {
     public async Task<GetSkillDto> AddAsync(AddSkillDto dto)
     {
