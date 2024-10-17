@@ -8,47 +8,25 @@ public static class JSONResponse
 {
     public static async Task<ResponseModel<T>> ToResponseAsync<T>(this Task<T> task, bool status = true, int statusCode = 200, string message = "", object data = null)
     {
-        try
+        var result = await task;
+        return new ResponseModel<T>
         {
-            var result = await task;
-            return new ResponseModel<T>
-            {
-                Status = status,
-                StatusCode = statusCode,
-                Message = message,
-                Data = result
-            };
-        }
-        catch (CustomException ex)
-        {
-            throw new CustomException(ex.StatusCode, ex.Message);
-        }
-        catch (Exception ex)
-        {
-            throw new CustomException(HttpStatusCode.InternalServerError, ex.Message);
-        }
+            Status = status,
+            StatusCode = statusCode,
+            Message = message,
+            Data = result
+        };
     }
 
     public static async Task<ResponseModel> ToResponseAsync(this Task task, bool status = true, int statusCode = 200, string message = "")
     {
-        try
+        await task;
+        return new ResponseModel
         {
-            await task;
-            return new ResponseModel
-            {
-                Status = status,
-                StatusCode = statusCode,
-                Message = message,
-            };
-        }
-        catch (CustomException ex)
-        {
-            throw new CustomException(ex.StatusCode, ex.Message);
-        }
-        catch (Exception ex)
-        {
-            throw new CustomException(HttpStatusCode.InternalServerError, ex.Message);
-        }
+            Status = status,
+            StatusCode = statusCode,
+            Message = message,
+        };
     }
 }
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using BL.Developer;
 using BL.Developer.DTOs.Request;
 using SharedKernel.Commons;
 using SharedKernel.Extensions;

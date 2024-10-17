@@ -28,15 +28,23 @@ namespace API.Middlewares
                 context.Response.StatusCode = (int)ex.StatusCode;
                 _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
 
-                string message = ex.Message;
-                if (ex.StatusCode == HttpStatusCode.InternalServerError)
-                    message = "Internal Server error.";
-                
                 await context.Response.WriteAsJsonAsync(new ResponseModel()
                 {
                     Status = false,
                     StatusCode = context.Response.StatusCode,
-                    Message = message
+                    Message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError; ;
+                _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
+
+                await context.Response.WriteAsJsonAsync(new ResponseModel()
+                {
+                    Status = false,
+                    StatusCode = context.Response.StatusCode,
+                    Message = "Internal Server error."
                 });
             }
         }

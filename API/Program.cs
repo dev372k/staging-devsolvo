@@ -2,6 +2,8 @@ using API;
 using API.Middlewares;
 using DAL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using SharedKernel.Commons;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1",
+    new OpenApiInfo
+    {
+        Title = "Devsolvo",
+        Version = "v1",
+        Description = "This is Devsolvo Project.",
+    });
+});
 builder.Services.ServicesRegistry(builder.Configuration);
 
 var app = builder.Build();
@@ -25,16 +36,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(DevContants.CORS);
-
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
-
 
 void ApplyMigration()
 {
