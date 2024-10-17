@@ -26,7 +26,7 @@ namespace API.Middlewares
             catch (CustomException ex)
             {
                 context.Response.StatusCode = (int)ex.StatusCode;
-                _logger.LogError($"Error Message: {ex}\n Error Detail: {ex.InnerException?.ToString()}");
+                _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
 
                 string message = ex.Message;
                 if (ex.StatusCode == HttpStatusCode.InternalServerError)

@@ -9,7 +9,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Skill, GetSkillDto>();
+        //CreateMap<Skill, GetSkillDto>();
         CreateMap<Developer, GetDeveloperDto>();
     }
 }
