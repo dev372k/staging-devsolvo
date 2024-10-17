@@ -28,7 +28,7 @@ namespace API.Middlewares
                 context.Response.StatusCode = (int)ex.StatusCode;
                 _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
 
-                await context.Response.WriteAsJsonAsync(new ResponseModel()
+                await context.Response.WriteAsJsonAsync(new ResponseModel
                 {
                     Status = false,
                     StatusCode = context.Response.StatusCode,
@@ -40,7 +40,7 @@ namespace API.Middlewares
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError; ;
                 _logger.LogError($"Error Message: {ex.Message}\n Error Detail: {ex}");
 
-                await context.Response.WriteAsJsonAsync(new ResponseModel()
+                await context.Response.WriteAsJsonAsync(new ResponseModel
                 {
                     Status = false,
                     StatusCode = context.Response.StatusCode,
